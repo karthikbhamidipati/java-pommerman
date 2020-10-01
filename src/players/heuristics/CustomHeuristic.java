@@ -4,7 +4,7 @@ import core.GameState;
 import utils.Types;
 
 public class CustomHeuristic extends StateHeuristic {
-    private BoardStats rootBoardStats;
+    private final BoardStats rootBoardStats;
 
     public CustomHeuristic(GameState root) {
         rootBoardStats = new BoardStats(root);
@@ -83,10 +83,10 @@ public class CustomHeuristic extends StateHeuristic {
          */
         double score(BoardStats futureState)
         {
-            int diffTeammates = futureState.nTeammates - this.nTeammates;
-            int diffEnemies = - (futureState.nEnemies - this.nEnemies);
-            int diffWoods = - (futureState.nWoods - this.nWoods);
-            int diffCanKick = futureState.canKick ? 1 : 0;
+            int diffTeammates = futureState.nTeammates - this.nTeammates; //negative cost if teammates reduce
+            int diffEnemies = - (futureState.nEnemies - this.nEnemies); //positive cost when nEnemies reduce, 0 if they stay the same
+            int diffWoods = - (futureState.nWoods - this.nWoods); //positive cost if number of woods decrease
+            int diffCanKick = futureState.canKick ? 1 : 0; //
             int diffBlastStrength = futureState.blastStrength - this.blastStrength;
 
             return (diffEnemies / 3.0) * FACTOR_ENEMY + diffTeammates * FACTOR_TEAM + (diffWoods / maxWoods) * FACTOR_WOODS

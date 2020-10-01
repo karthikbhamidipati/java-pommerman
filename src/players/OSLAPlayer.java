@@ -14,7 +14,6 @@ public class OSLAPlayer extends Player {
     private Random random;
     private boolean rndOpponentModel;
     public double epsilon = 1e-6;
-    private StateHeuristic rootStateHeuristic;
 
     public OSLAPlayer(long seed, int id) {
         super(seed, id);
@@ -30,7 +29,7 @@ public class OSLAPlayer extends Player {
     @Override
     public Types.ACTIONS act(GameState gs) {
 
-        rootStateHeuristic = new CustomHeuristic(gs);
+        StateHeuristic rootStateHeuristic = new CustomHeuristic(gs);
         rndOpponentModel = true;
 
         ArrayList<Types.ACTIONS> actionsList = Types.ACTIONS.all();
