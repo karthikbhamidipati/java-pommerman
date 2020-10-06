@@ -7,6 +7,8 @@ import players.rhea.utils.Constants;
 import players.rhea.utils.RHEAParams;
 import utils.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static utils.Types.VISUALS;
@@ -151,7 +153,9 @@ public class Run {
             }
             System.out.println("]");
 
+            LocalDateTime before = LocalDateTime.now();
             runGames(game, seeds, N, false);
+            System.out.println("Time Taken : " + Duration.between(before, LocalDateTime.now()).getSeconds() + " seconds");
         } catch(Exception e) {
             e.printStackTrace();
             printHelp();
@@ -190,6 +194,7 @@ public class Run {
 
         int numSeeds = seeds.length;
         int totalNgames = numSeeds * repetitions;
+        List<Integer> ticks = new ArrayList<>(totalNgames);
 
         for(int s = 0; s<numSeeds; s++) {
             long seed = seeds[s];
@@ -224,6 +229,8 @@ public class Run {
                     }
                 }
 
+                ticks.add(g.getTick());
+
                 int[] overtimes = g.getPlayerOvertimes();
                 for(int j = 0; j < overtimes.length; ++j)
                     overtimeCount[j] += overtimes[j];
@@ -243,5 +250,18 @@ public class Run {
 
             System.out.println(totalNgames + "\t" + winPerc + "%\t" + tiePerc + "%\t" + lossPerc + "%\t" + player + " (" + overtimesAvg + ")" );
         }
+
+        double average = 0;
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+
+        for (int tick: ticks) {
+            average += tick;
+            min = Math.min(min, tick);
+            max = Math.max(max, tick);
+        }
+
+        average /= ticks.size();
+
+        System.out.printf("Average Ticks : %s, Highest Ticks : %s, Lowest Ticks : %s%n", average, max, min);
     }
 }
