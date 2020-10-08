@@ -6,7 +6,6 @@ import players.Player;
 import utils.ElapsedCpuTimer;
 import utils.Types;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MCTSPlayer extends ParameterizedPlayer {
@@ -34,12 +33,7 @@ public class MCTSPlayer extends ParameterizedPlayer {
         super(seed, id, params);
         reset(seed, id);
 
-        ArrayList<Types.ACTIONS> actionsList = Types.ACTIONS.all();
-        actions = new Types.ACTIONS[actionsList.size()];
-        int i = 0;
-        for (Types.ACTIONS act : actionsList) {
-            actions[i++] = act;
-        }
+        this.actions = Types.ACTIONS.all().toArray(new Types.ACTIONS[0]);
     }
 
     @Override
