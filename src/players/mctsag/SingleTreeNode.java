@@ -184,7 +184,7 @@ public class SingleTreeNode {
      */
     private SingleTreeNode uct(GameState state) {
         SingleTreeNode selected = null;
-        double bestValue = Double.MIN_VALUE;
+        double bestValue = -Double.MAX_VALUE;
         for (SingleTreeNode child : this.children) {
             double hvVal = child.totValue;
             double childValue = hvVal / (child.nVisits + params.epsilon);

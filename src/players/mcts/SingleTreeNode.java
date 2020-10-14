@@ -65,13 +65,6 @@ public class SingleTreeNode
     }
 
 
-    /**
-     * Performs selection and expansion
-     * For selection, if the next actions are not fully explored, explores and expands them, else uses uct for selecting(exploration and exploitation) next action
-     * From the selected node, performs rollout until terminal state/ certain depth
-     * backpropagates the score
-     *
-     */
     void mctsSearch(ElapsedCpuTimer elapsedTimer) {
 
         double avgTimeTaken;
@@ -109,14 +102,6 @@ public class SingleTreeNode
         //System.out.println(" ITERS " + numIters);
     }
 
-    /**
-     *
-     * If it's a terminal state or max rollout depth is reached, return current node
-     * else If children of the current node are not expanded, expand them by random simulation and picking the best random value
-     *      Roll the state forward for the random child expanded
-     * else using uct, Use exploration and exploitation to pick the next child to be explored
-     *
-     */
     private SingleTreeNode treePolicy(GameState state) {
 
         SingleTreeNode cur = this;
@@ -181,7 +166,7 @@ public class SingleTreeNode
 
     private SingleTreeNode uct(GameState state) {
         SingleTreeNode selected = null;
-        double bestValue = Double.MIN_VALUE;
+        double bestValue = -Double.MAX_VALUE;
         for (SingleTreeNode child : this.children)
         {
             double hvVal = child.totValue;
@@ -212,9 +197,6 @@ public class SingleTreeNode
         return selected;
     }
 
-    /**
-     * Performs rollouts by picking a safe random action
-     */
     private double rollOut(GameState state)
     {
         int thisDepth = this.m_depth;
