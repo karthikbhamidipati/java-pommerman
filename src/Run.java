@@ -131,7 +131,7 @@ public class Run {
                         mctsAGParams.stop_type = mctsAGParams.STOP_ITERATIONS;
                         mctsAGParams.num_iterations = 200;
                         mctsAGParams.rollout_depth = 12;
-
+                        mctsAGParams.decay_factor = 0.95;
                         mctsAGParams.heuristic_method = mctsAGParams.CUSTOM_HEURISTIC;
                         p = new MCTSAGPlayer(seed, playerID++, mctsAGParams);
                         playerStr[i-4] = "MCTS-AG";

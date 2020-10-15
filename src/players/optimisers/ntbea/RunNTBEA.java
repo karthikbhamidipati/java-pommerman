@@ -1,5 +1,7 @@
 package players.optimisers.ntbea;
 
+import players.mctsag.MCTSAGParams;
+import players.mctsag.MCTSAGPlayer;
 import players.optimisers.ParameterizedPlayer;
 import players.optimisers.evodef.EvaluatePommerman;
 import players.mcts.MCTSParams;
@@ -20,8 +22,8 @@ public class RunNTBEA {
         int nEvals = Integer.parseInt(args[0]);
         boolean topLevel = Boolean.parseBoolean(args[1]);
 
-        RHEAParams parameterSet = new RHEAParams();
-        ParameterizedPlayer player = new RHEAPlayer(0, 0, parameterSet);
+        MCTSAGParams parameterSet = new MCTSAGParams();
+        ParameterizedPlayer player = new MCTSAGPlayer(0, 0, parameterSet);
         parameterSet.printParameterSearchSpace();
 
 //        MCTSParams parameterSet = new MCTSParams();

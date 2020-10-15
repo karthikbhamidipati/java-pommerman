@@ -27,7 +27,7 @@ public class MCTSAGParams implements ParameterSet {
     public double K = Math.sqrt(2);
     public int rollout_depth = 8;//10;
     public int heuristic_method = CUSTOM_HEURISTIC;
-    public double discount_factor = 0.9; // Must be less than 1
+    public double decay_factor = 0.9; // Must be less than 1
 
     // Budget settings
     public int stop_type = STOP_TIME;
@@ -68,6 +68,7 @@ public class MCTSAGParams implements ParameterSet {
         HashMap<String, Object[]> parameterValues = new HashMap<>();
         parameterValues.put("K", new Double[]{1.0, Math.sqrt(2), 2.0});
         parameterValues.put("rollout_depth", new Integer[]{5, 8, 10, 12, 15});
+        parameterValues.put("decay_factor", new Double[] {0.7, 0.8, 0.85, 0.9, 0.92, 0.94, 0.96, 0.98});
         parameterValues.put("heuristic_method", new Integer[]{CUSTOM_HEURISTIC, ADVANCED_HEURISTIC});
         return parameterValues;
     }

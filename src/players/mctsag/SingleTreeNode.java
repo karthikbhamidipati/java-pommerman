@@ -380,7 +380,7 @@ public class SingleTreeNode {
     }
 
     private void discountNode(SingleTreeNode node) {
-        node.nVisits = (int) (node.nVisits * params.discount_factor);
-        node.totValue *= params.discount_factor;
+        node.nVisits = (int) (node.nVisits * params.decay_factor);
+        node.totValue *= params.decay_factor;
     }
 }
