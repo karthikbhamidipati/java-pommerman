@@ -27,6 +27,7 @@ public class MCTSAGParams implements ParameterSet {
     public double K = Math.sqrt(2);
     public int rollout_depth = 8;//10;
     public int heuristic_method = CUSTOM_HEURISTIC;
+    public double discount_factor = 0.9; // Must be less than 1
 
     // Budget settings
     public int stop_type = STOP_TIME;

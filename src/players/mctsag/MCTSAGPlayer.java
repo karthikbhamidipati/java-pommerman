@@ -50,6 +50,7 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
             this.params = new MCTSAGParams();
             super.setParameters(this.params);
         }
+        this.curr = null;
     }
 
     @Override
@@ -69,6 +70,8 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
         // Root of the tree
         if (this.curr == null)  {
             this.curr = new SingleTreeNode(params, m_rnd, num_actions, actions);
+        } else {
+            this.curr.updateTree();
         }
 
         this.curr.setRootGameState(gs);

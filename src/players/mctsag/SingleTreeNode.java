@@ -10,6 +10,8 @@ import utils.Utils;
 import utils.Vector2d;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 public class SingleTreeNode {
@@ -64,6 +66,10 @@ public class SingleTreeNode {
 
     public SingleTreeNode[] getChildren() {
         return children;
+    }
+
+    public void setM_depth(int m_depth) {
+        this.m_depth = m_depth;
     }
 
     /**
@@ -351,5 +357,30 @@ public class SingleTreeNode {
         }
 
         return false;
+    }
+
+    public void updateTree() {
+        Queue<SingleTreeNode> queue = new LinkedList<>();
+        queue.offer(this);
+        for (int level = 0; !queue.isEmpty(); level++) {
+            int size = queue.size();
+            while (size-- > 0) {
+                SingleTreeNode node = queue.poll();
+                if (node != null) {
+                    discountNode(node);
+                    node.setM_depth(level);
+                    for (SingleTreeNode child : node.getChildren()) {
+                        if (child != null) {
+                            queue.offer(child);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void discountNode(SingleTreeNode node) {
+        node.nVisits = (int) (node.nVisits * params.discount_factor);
+        node.totValue *= params.discount_factor;
     }
 }
