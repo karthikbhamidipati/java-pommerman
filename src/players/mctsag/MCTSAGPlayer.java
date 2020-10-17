@@ -1,14 +1,14 @@
-package players.mcts;
+package players.mctsag;
 
 import core.GameState;
-import players.optimisers.ParameterizedPlayer;
 import players.Player;
+import players.optimisers.ParameterizedPlayer;
 import utils.ElapsedCpuTimer;
 import utils.Types;
 
 import java.util.Random;
 
-public class MCTSPlayer extends ParameterizedPlayer {
+public class MCTSAGPlayer extends ParameterizedPlayer {
 
     /**
      * Random generator.
@@ -23,15 +23,19 @@ public class MCTSPlayer extends ParameterizedPlayer {
     /**
      * Params for this MCTS
      */
-    public MCTSParams params;
+    public MCTSAGParams params;
 
-    public MCTSPlayer(long seed, int id) {
-        this(seed, id, new MCTSParams());
+    private SingleTreeNode curr;
+
+    public MCTSAGPlayer(long seed, int id) {
+        this(seed, id, new MCTSAGParams());
     }
 
-    public MCTSPlayer(long seed, int id, MCTSParams params) {
+    public MCTSAGPlayer(long seed, int id, MCTSAGParams params) {
         super(seed, id, params);
         reset(seed, id);
+
+        this.curr = null;
 
         this.actions = Types.ACTIONS.all().toArray(new Types.ACTIONS[0]);
     }
@@ -41,11 +45,12 @@ public class MCTSPlayer extends ParameterizedPlayer {
         super.reset(seed, playerID);
         m_rnd = new Random(seed);
 
-        this.params = (MCTSParams) getParameters();
+        this.params = (MCTSAGParams) getParameters();
         if (this.params == null) {
-            this.params = new MCTSParams();
+            this.params = new MCTSAGParams();
             super.setParameters(this.params);
         }
+        this.curr = null;
     }
 
     @Override
@@ -63,14 +68,21 @@ public class MCTSPlayer extends ParameterizedPlayer {
         int num_actions = actions.length;
 
         // Root of the tree
-        SingleTreeNode m_root = new SingleTreeNode(params, m_rnd, num_actions, actions);
-        m_root.setRootGameState(gs);
+        if (this.curr == null)  {
+            this.curr = new SingleTreeNode(params, m_rnd, num_actions, actions);
+        } else {
+            this.curr.updateTree();
+        }
+
+        this.curr.setRootGameState(gs);
 
         //Determine the action using MCTS...
-        m_root.mctsSearch(ect);
+        this.curr.mctsSearch(ect);
 
         //Determine the best action to take and return it.
-        int action = m_root.mostVisitedAction();
+        int action = this.curr.mostVisitedAction();
+
+        this.curr = this.curr.getChildren()[action];
 
         // TODO update message memory
 
@@ -88,6 +100,6 @@ public class MCTSPlayer extends ParameterizedPlayer {
 
     @Override
     public Player copy() {
-        return new MCTSPlayer(seed, playerID, params);
+        return new MCTSAGPlayer(seed, playerID, params);
     }
 }
