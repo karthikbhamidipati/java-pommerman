@@ -133,6 +133,8 @@ public class Run {
                         mctsAGParams.rollout_depth = 18;
                         mctsAGParams.decay_factor = 0.78;
                         mctsAGParams.heuristic_method = mctsAGParams.ADVANCED_HEURISTIC;
+                        mctsAGParams.opp_model = MCTSAGParams.OppModel.RANDOM;
+
                         p = new MCTSAGPlayer(seed, playerID++, mctsAGParams);
                         playerStr[i-4] = "MCTS-AG";
                         break;

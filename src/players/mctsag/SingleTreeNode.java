@@ -171,6 +171,26 @@ public class SingleTreeNode {
         for (int i = 0; i < nPlayers; ++i) {
             if (playerId == i) {
                 actionsAll[i] = act;
+            } else if (params.opp_model == MCTSAGParams.OppModel.SAME_ACTION) {
+                actionsAll[i] = act;
+            } else if (params.opp_model == MCTSAGParams.OppModel.MIRROR) {
+                switch (act) {
+                    case ACTION_UP:
+                        actionsAll[i] = Types.ACTIONS.ACTION_DOWN;
+                        break;
+                    case ACTION_DOWN:
+                        actionsAll[i] = Types.ACTIONS.ACTION_UP;
+                        break;
+                    case ACTION_LEFT:
+                        actionsAll[i] = Types.ACTIONS.ACTION_RIGHT;
+                        break;
+                    case ACTION_RIGHT:
+                        actionsAll[i] = Types.ACTIONS.ACTION_LEFT;
+                        break;
+                    default:
+                        actionsAll[i] = act;
+                        break;
+                }
             } else {
                 int actionIdx = m_rnd.nextInt(gs.nActions());
                 actionsAll[i] = Types.ACTIONS.all().get(actionIdx);
