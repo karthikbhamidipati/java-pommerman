@@ -35,6 +35,17 @@ public class MCTSAGParams implements ParameterSet {
     public int num_fmcalls = 2000;
     public int num_time = 40;
 
+    // Opponent Modelling
+    public enum OppModel {
+        RANDOM(),
+        MIRROR(),
+        SAME_ACTION()
+    }
+
+    // Random Model is the default
+    public OppModel opp_model = OppModel.RANDOM;
+
+
     @Override
     public void setParameterValue(String param, Object value) {
         switch(param) {
