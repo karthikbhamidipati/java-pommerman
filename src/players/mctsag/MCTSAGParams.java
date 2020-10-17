@@ -40,6 +40,7 @@ public class MCTSAGParams implements ParameterSet {
         switch(param) {
             case "K": K = (double) value; break;
             case "rollout_depth": rollout_depth = (int) value; break;
+            case "decay_factor": decay_factor = (double) value; break;
             case "heuristic_method": heuristic_method = (int) value; break;
         }
     }
@@ -49,6 +50,7 @@ public class MCTSAGParams implements ParameterSet {
         switch(param) {
             case "K": return K;
             case "rollout_depth": return rollout_depth;
+            case "decay_factor": return decay_factor;
             case "heuristic_method": return heuristic_method;
         }
         return null;
@@ -59,6 +61,7 @@ public class MCTSAGParams implements ParameterSet {
         ArrayList<String> paramList = new ArrayList<>();
         paramList.add("K");
         paramList.add("rollout_depth");
+        paramList.add("decay_factor");
         paramList.add("heuristic_method");
         return paramList;
     }

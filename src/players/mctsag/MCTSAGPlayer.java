@@ -57,7 +57,7 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
     public Types.ACTIONS act(GameState gs) {
 
         // TODO update gs
-        if (gs.getGameMode().equals(Types.GAME_MODE.TEAM_RADIO)){
+        if (gs.getGameMode().equals(Types.GAME_MODE.TEAM)){
             int[] msg = gs.getMessage();
         }
 

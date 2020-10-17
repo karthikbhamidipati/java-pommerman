@@ -19,8 +19,11 @@ import java.util.Map;
 
 public class RunNTBEA {
     public static void main(String[] args) {
-        int nEvals = Integer.parseInt(args[0]);
-        boolean topLevel = Boolean.parseBoolean(args[1]);
+//        int nEvals = Integer.parseInt(args[0]);
+//        boolean topLevel = Boolean.parseBoolean(args[1]);
+
+        int nEvals = 5;
+        boolean topLevel = true;
 
         MCTSAGParams parameterSet = new MCTSAGParams();
         ParameterizedPlayer player = new MCTSAGPlayer(0, 0, parameterSet);
