@@ -24,14 +24,14 @@ public class MCTSAGParams implements ParameterSet {
     public double epsilon = 1e-6;
 
     // Parameters
-    public double K = Math.sqrt(2);
-    public int rollout_depth = 8;//10;
-    public int heuristic_method = CUSTOM_HEURISTIC;
-    public double decay_factor = 0.9; // Must be less than 1
+    public double K = 1;
+    public int rollout_depth = 18;//10;
+    public int heuristic_method = ADVANCED_HEURISTIC;
+    public double decay_factor = 0.78; // Must be less than 1
 
     // Budget settings
     public int stop_type = STOP_TIME;
-    public int num_iterations = 200;
+    public int num_iterations = 300;
     public int num_fmcalls = 2000;
     public int num_time = 40;
 
@@ -40,6 +40,8 @@ public class MCTSAGParams implements ParameterSet {
         switch(param) {
             case "K": K = (double) value; break;
             case "rollout_depth": rollout_depth = (int) value; break;
+            case "num_iterations": num_iterations = (int) value; break;
+            case "decay_factor": decay_factor = (double) value; break;
             case "heuristic_method": heuristic_method = (int) value; break;
         }
     }
@@ -49,6 +51,8 @@ public class MCTSAGParams implements ParameterSet {
         switch(param) {
             case "K": return K;
             case "rollout_depth": return rollout_depth;
+            case "num_iterations": return num_iterations;
+            case "decay_factor": return decay_factor;
             case "heuristic_method": return heuristic_method;
         }
         return null;
@@ -59,6 +63,8 @@ public class MCTSAGParams implements ParameterSet {
         ArrayList<String> paramList = new ArrayList<>();
         paramList.add("K");
         paramList.add("rollout_depth");
+        paramList.add("num_iterations");
+        paramList.add("decay_factor");
         paramList.add("heuristic_method");
         return paramList;
     }
@@ -67,8 +73,9 @@ public class MCTSAGParams implements ParameterSet {
     public Map<String, Object[]> getParameterValues() {
         HashMap<String, Object[]> parameterValues = new HashMap<>();
         parameterValues.put("K", new Double[]{1.0, Math.sqrt(2), 2.0});
-        parameterValues.put("rollout_depth", new Integer[]{5, 8, 10, 12, 15});
-        parameterValues.put("decay_factor", new Double[] {0.7, 0.8, 0.85, 0.9, 0.92, 0.94, 0.96, 0.98});
+        parameterValues.put("rollout_depth", new Integer[]{10, 12, 15, 16, 17, 18});
+        parameterValues.put("num_iterations", new Integer[]{240, 260, 280, 300, 310});
+        parameterValues.put("decay_factor", new Double[] {0.85, 0.9, 0.92, 0.94, 0.96, 0.98});
         parameterValues.put("heuristic_method", new Integer[]{CUSTOM_HEURISTIC, ADVANCED_HEURISTIC});
         return parameterValues;
     }

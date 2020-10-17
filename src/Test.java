@@ -21,7 +21,7 @@ public class Test {
         Types.GAME_MODE gameMode = Types.GAME_MODE.FFA;
         boolean useSeparateThreads = false;
 
-        Game game = new Game(seed, boardSize, Types.GAME_MODE.FFA, "");
+        Game game = new Game(seed, boardSize, Types.GAME_MODE.TEAM, "");
 
         // Key controllers for human player s (up to 2 so far).
         KeyController ki1 = new KeyController(true);
@@ -40,13 +40,14 @@ public class Test {
 
 //        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
         players.add(new MCTSPlayer(seed, playerID++, mctsParams));
-
+        players.add(new MCTSAGPlayer(seed, playerID++));
+        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
 //        players.add(new DoNothingPlayer(playerID++));
 //        players.add(new OSLAPlayer(seed, playerID++));
 //        players.add(new RHEAPlayer(seed, playerID++, rheaParams));
-        players.add(new SimplePlayer(seed, playerID++));
+//        players.add(new SimplePlayer(seed, playerID++));
 //        players.add(new MCTSPlayer(seed, playerID++, new MCTSParams()));
-        players.add(new RHEAPlayer(seed, playerID, rheaParams));
+//        players.add(new RHEAPlayer(seed, playerID, rheaParams));
         players.add(new MCTSAGPlayer(seed, playerID++));
         // Make sure we have exactly NUM_PLAYERS players
         assert players.size() == Types.NUM_PLAYERS : "There should be " + Types.NUM_PLAYERS +
