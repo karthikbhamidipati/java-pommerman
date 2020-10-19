@@ -14,6 +14,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import static utils.Types.COLLAPSE_START;
+import static utils.Types.COLLAPSE_STEP;
+
 public class SingleTreeNode {
     public MCTSAGParams params;
 
@@ -258,6 +261,14 @@ public class SingleTreeNode {
     private int safeRandomAction(GameState state) {
         Types.TILETYPE[][] board = state.getBoard();
         ArrayList<Types.ACTIONS> actionsToTry = Types.ACTIONS.all();
+
+        int collapsed = 0;
+        int gsTick = state.getTick();
+
+        if (gsTick >= COLLAPSE_START - 2) {
+             collapsed = ((gsTick - COLLAPSE_START - 2) / COLLAPSE_STEP) + 1;
+        }
+
         int width = board.length;
         int height = board[0].length;
 
@@ -271,7 +282,7 @@ public class SingleTreeNode {
             int x = pos.x + dir.x;
             int y = pos.y + dir.y;
 
-            if (x >= 0 && x < width && y >= 0 && y < height)
+            if (x >= collapsed && x < width - collapsed && y >= collapsed && y < height - collapsed)
                 if (board[y][x] != Types.TILETYPE.FLAMES)
                     return nAction;
 
