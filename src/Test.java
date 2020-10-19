@@ -1,5 +1,6 @@
 import core.Game;
 import players.*;
+import players.mctsag.MCTSAGParams;
 import players.mctsag.MCTSAGPlayer;
 import utils.Types;
 import players.rhea.utils.Constants;
@@ -36,18 +37,31 @@ public class Test {
         mctsParams.heuristic_method = mctsParams.CUSTOM_HEURISTIC;
 
         RHEAParams rheaParams = new RHEAParams();
+        rheaParams.budget_type = Constants.ITERATION_BUDGET;
+        rheaParams.iteration_budget = 200;
+        rheaParams.individual_length = 12;
         rheaParams.heurisic_type = Constants.CUSTOM_HEURISTIC;
+        rheaParams.mutation_rate = 0.5;
+
+        MCTSAGParams mctsAGParams = new MCTSAGParams();
+        mctsAGParams.stop_type = mctsAGParams.STOP_ITERATIONS;
+        mctsAGParams.num_iterations = 400;
+        mctsAGParams.rollout_depth = 8;
+        mctsAGParams.decay_factor = 0.8;
+        mctsAGParams.heuristic_method = mctsAGParams.CUSTOM_HEURISTIC;
+        mctsAGParams.opp_model = MCTSAGParams.OppModel.RANDOM;
+
 
 //        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
-        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
+//        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
 
 //        players.add(new DoNothingPlayer(playerID++));
-//        players.add(new OSLAPlayer(seed, playerID++));
+        players.add(new OSLAPlayer(seed, playerID++));
 //        players.add(new RHEAPlayer(seed, playerID++, rheaParams));
         players.add(new SimplePlayer(seed, playerID++));
 //        players.add(new MCTSPlayer(seed, playerID++, new MCTSParams()));
         players.add(new RHEAPlayer(seed, playerID, rheaParams));
-        players.add(new MCTSAGPlayer(seed, playerID++));
+        players.add(new MCTSAGPlayer(seed, playerID++, mctsAGParams));
         // Make sure we have exactly NUM_PLAYERS players
         assert players.size() == Types.NUM_PLAYERS : "There should be " + Types.NUM_PLAYERS +
                 " added to the game, but there are " + players.size();
