@@ -55,7 +55,8 @@ public class SingleTreeNode {
             m_depth = 0;
     }
 
-    void setRootGameState(GameState gs) {
+    void setRootGameState(GameState gs)
+    {
         this.rootState = gs;
         if (params.heuristic_method == params.CUSTOM_HEURISTIC)
             this.rootStateHeuristic = new CustomHeuristic(gs);

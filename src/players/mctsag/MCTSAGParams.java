@@ -24,7 +24,7 @@ public class MCTSAGParams implements ParameterSet {
     public double epsilon = 1e-6;
 
     // Parameters
-    public double K = Math.sqrt(2);
+    public double K = Math.sqrt(1);
     public int rollout_depth = 8;//10;
     public int heuristic_method = CUSTOM_HEURISTIC;
     public double decay_factor = 0.9; // Must be less than 1
