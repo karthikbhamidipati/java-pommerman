@@ -265,8 +265,8 @@ public class SingleTreeNode {
         int collapsed = 0;
         int gsTick = state.getTick();
 
-        if (gsTick >= COLLAPSE_START - 2) {
-             collapsed = ((gsTick - COLLAPSE_START - 2) / COLLAPSE_STEP) + 1;
+        if (gsTick >= COLLAPSE_START - params.pre_collapse_steps) {
+             collapsed = ((gsTick - COLLAPSE_START - params.pre_collapse_steps) / COLLAPSE_STEP) + 1;
         }
 
         int width = board.length;
