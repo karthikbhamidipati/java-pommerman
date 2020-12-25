@@ -220,7 +220,6 @@ public class SingleTreeNode {
 
             childValue = Utils.normalise(childValue, bounds[0], bounds[1]);
 
-            // TODO - progressive bias
             double uctValue = childValue +
                     params.K * Math.sqrt(Math.log(this.nVisits + 1) / (child.nVisits + params.epsilon));
 
