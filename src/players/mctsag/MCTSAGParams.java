@@ -24,14 +24,14 @@ public class MCTSAGParams implements ParameterSet {
     public double epsilon = 1e-6;
 
     // Parameters
-    public double K = Math.sqrt(2);
-    public int rollout_depth = 8;//10;
+    public double K = 1;
+    public int rollout_depth = 18;//10;
     public int heuristic_method = CUSTOM_HEURISTIC;
-    public double decay_factor = 0.9; // Must be less than 1
+    public double decay_factor = 0.8; // Must be less than 1
 
     // Budget settings
     public int stop_type = STOP_TIME;
-    public int num_iterations = 200;
+    public int num_iterations = 300;
     public int num_fmcalls = 2000;
     public int num_time = 40;
 

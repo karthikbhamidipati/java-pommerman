@@ -132,6 +132,7 @@ public class Run {
                         mctsAGParams.num_iterations = 200;
                         mctsAGParams.rollout_depth = 12;
                         mctsAGParams.decay_factor = 0.95;
+                        mctsAGParams.K = 1;
                         mctsAGParams.heuristic_method = mctsAGParams.CUSTOM_HEURISTIC;
                         mctsAGParams.opp_model = MCTSAGParams.OppModel.RANDOM;
 
