@@ -276,7 +276,7 @@ public class SingleTreeNode {
 
         /**
          *  Setting the number of corner tiles to avoid based on pre_collapse_steps
-        */
+         */
         if (gsTick >= COLLAPSE_START - params.pre_collapse_steps) {
              collapsed = ((gsTick - COLLAPSE_START - params.pre_collapse_steps) / COLLAPSE_STEP) + 1;
         }
