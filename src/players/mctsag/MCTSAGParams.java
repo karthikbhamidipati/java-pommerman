@@ -26,7 +26,7 @@ public class MCTSAGParams implements ParameterSet {
     // Parameters
     public double K = 1;
     public int rollout_depth = 18;//10;
-    public int heuristic_method = CUSTOM_HEURISTIC;
+    public int heuristic_method = ADVANCED_HEURISTIC;
     public double decay_factor = 0.8; // Must be less than 1
 
     // Budget settings

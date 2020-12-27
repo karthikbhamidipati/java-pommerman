@@ -134,7 +134,7 @@ public class Run {
                         mctsAGParams.decay_factor = 0.8;
                         mctsAGParams.K = 1;
                         mctsAGParams.pre_collapse_steps = 3;
-                        mctsAGParams.heuristic_method = mctsAGParams.CUSTOM_HEURISTIC;
+                        mctsAGParams.heuristic_method = mctsAGParams.ADVANCED_HEURISTIC;
                         mctsAGParams.opp_model = MCTSAGParams.OppModel.RANDOM;
 
                         p = new MCTSAGPlayer(seed, playerID++, mctsAGParams);
