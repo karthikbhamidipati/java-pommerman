@@ -25,7 +25,7 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
      */
     public MCTSAGParams params;
 
-    private SingleTreeNode curr;
+    private SingleTreeNode root;
 
     public MCTSAGPlayer(long seed, int id) {
         this(seed, id, new MCTSAGParams());
@@ -35,7 +35,7 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
         super(seed, id, params);
         reset(seed, id);
 
-        this.curr = null;
+        this.root = null;
 
         this.actions = Types.ACTIONS.all().toArray(new Types.ACTIONS[0]);
     }
@@ -50,7 +50,8 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
             this.params = new MCTSAGParams();
             super.setParameters(this.params);
         }
-        this.curr = null;
+        // setting the root to null when resetting for a fresh start to collect statistics
+        this.root = null;
     }
 
     @Override
@@ -67,22 +68,28 @@ public class MCTSAGPlayer extends ParameterizedPlayer {
         // Number of actions available
         int num_actions = actions.length;
 
-        // Root of the tree
-        if (this.curr == null)  {
-            this.curr = new SingleTreeNode(params, m_rnd, num_actions, actions);
+        /**
+         * Root of the tree
+         * If root is null, initialize the root
+         * else update the tree by discounting the statistics(totValue & nVisits) and updating the max depth of all the nodes in the tree
+         *
+         */
+        if (this.root == null)  {
+            this.root = new SingleTreeNode(params, m_rnd, num_actions, actions);
         } else {
-            this.curr.updateTree();
+            this.root.updateTree();
         }
 
-        this.curr.setRootGameState(gs);
+        this.root.setRootGameState(gs);
 
         //Determine the action using MCTS...
-        this.curr.mctsSearch(ect);
+        this.root.mctsSearch(ect);
 
         //Determine the best action to take and return it.
-        int action = this.curr.mostVisitedAction();
+        int action = this.root.mostVisitedAction();
 
-        this.curr = this.curr.getChildren()[action];
+        // Updating the root with the subtree of the action chosen
+        this.root = this.root.getChildren()[action];
 
         // TODO update message memory
 

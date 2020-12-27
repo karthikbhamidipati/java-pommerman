@@ -165,6 +165,16 @@ public class SingleTreeNode {
         return tn;
     }
 
+    /**
+     * Algorithm:
+     *  - For the current playerId, set it's action as act
+     *  - For the opponents,
+     *      - If the opponent model is same action, pick the same action as act
+     *      - If the opponent model is mirror, mirror left, right, down and up actions and pick the same action for stop and bomb
+     *      - If the opponent model is random, pick a random action
+     * @param gs - game state
+     * @param act - action to act
+     */
     private void roll(GameState gs, Types.ACTIONS act) {
         //Simple, all random first, then my position.
         int nPlayers = 4;
@@ -264,6 +274,9 @@ public class SingleTreeNode {
         int collapsed = 0;
         int gsTick = state.getTick();
 
+        /**
+         *  Setting the number of corner tiles to avoid based on pre_collapse_steps
+        */
         if (gsTick >= COLLAPSE_START - params.pre_collapse_steps) {
              collapsed = ((gsTick - COLLAPSE_START - params.pre_collapse_steps) / COLLAPSE_STEP) + 1;
         }
@@ -281,6 +294,7 @@ public class SingleTreeNode {
             int x = pos.x + dir.x;
             int y = pos.y + dir.y;
 
+            // avoiding the collapsed number of corners
             if (x >= collapsed && x < width - collapsed && y >= collapsed && y < height - collapsed)
                 if (board[y][x] != Types.TILETYPE.FLAMES)
                     return nAction;
@@ -389,6 +403,13 @@ public class SingleTreeNode {
         return false;
     }
 
+    /**
+     * For each node in the tree,
+     *  - discount the totValue using the discount factor
+     *  - set the max_depth to the level of the tree
+     *
+     * parses the nodes in a null-safe way
+     */
     public void updateTree() {
         Queue<SingleTreeNode> queue = new LinkedList<>();
         queue.offer(this);
@@ -409,6 +430,11 @@ public class SingleTreeNode {
         }
     }
 
+    /**
+     * discounts the totValue and nVisits of a node
+     *
+     * @param node - node in the subtree
+     */
     private void discountNode(SingleTreeNode node) {
         node.nVisits = (int) (node.nVisits * params.decay_factor);
         node.totValue *= params.decay_factor;
