@@ -406,7 +406,7 @@ public class SingleTreeNode {
     /**
      * For each node in the tree,
      *  - discount the totValue using the discount factor
-     *  - set the max_depth to the level of the tree
+     *  - set the max_depth to the level of the node in the tree
      *
      * parses the nodes in a null-safe way
      */
