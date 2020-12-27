@@ -1,13 +1,9 @@
 package players.optimisers.ntbea;
 
-import players.mctsag.MCTSAGParams;
-import players.mctsag.MCTSAGPlayer;
+import players.groupAG.MCTSAGParams;
+import players.groupAG.MCTSAGPlayer;
 import players.optimisers.ParameterizedPlayer;
 import players.optimisers.evodef.EvaluatePommerman;
-import players.mcts.MCTSParams;
-import players.mcts.MCTSPlayer;
-import players.rhea.RHEAPlayer;
-import players.rhea.utils.RHEAParams;
 
 import java.util.ArrayList;
 import java.util.Arrays;

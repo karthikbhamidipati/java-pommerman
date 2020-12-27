@@ -1,10 +1,9 @@
 import core.Game;
 import players.*;
-import players.mctsag.MCTSAGParams;
-import players.mctsag.MCTSAGPlayer;
+import players.groupAG.MCTSAGParams;
+import players.groupAG.MCTSAGPlayer;
 import utils.Types;
 import players.rhea.utils.Constants;
-import players.mcts.MCTSPlayer;
 import players.mcts.MCTSParams;
 import players.rhea.RHEAPlayer;
 import players.rhea.utils.RHEAParams;

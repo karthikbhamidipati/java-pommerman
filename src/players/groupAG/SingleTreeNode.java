@@ -1,4 +1,4 @@
-package players.mctsag;
+package players.groupAG;
 
 import core.GameState;
 import players.heuristics.AdvancedHeuristic;

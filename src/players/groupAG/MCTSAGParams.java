@@ -1,4 +1,4 @@
-package players.mctsag;
+package players.groupAG;
 
 import players.optimisers.ParameterSet;
 import utils.Pair;
