@@ -129,10 +129,11 @@ public class Run {
                     case 6:
                         MCTSAGParams mctsAGParams = new MCTSAGParams();
                         mctsAGParams.stop_type = mctsAGParams.STOP_ITERATIONS;
-                        mctsAGParams.num_iterations = 200;
-                        mctsAGParams.rollout_depth = 12;
-                        mctsAGParams.decay_factor = 0.95;
+                        mctsAGParams.num_iterations = 300;
+                        mctsAGParams.rollout_depth = 18;
+                        mctsAGParams.decay_factor = 0.8;
                         mctsAGParams.K = 1;
+                        mctsAGParams.pre_collapse_steps = 3;
                         mctsAGParams.heuristic_method = mctsAGParams.CUSTOM_HEURISTIC;
                         mctsAGParams.opp_model = MCTSAGParams.OppModel.RANDOM;
 

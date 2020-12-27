@@ -46,7 +46,7 @@ public class MCTSAGParams implements ParameterSet {
     public OppModel opp_model = OppModel.RANDOM;
 
     // Collapse Avoidance
-    public int pre_collapse_steps = 5;
+    public int pre_collapse_steps = 3;
 
 
     @Override
